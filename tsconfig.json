@@ -66,9 +66,9 @@
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "paths": {
-      "@shared/*": ["../../Common/*", "./src/Common/*"],
+      "@shared/*": ["../Common/*", "./src/Common/*"],
       "@db-interace/*": [
-        "../../Common/interface/db/*",
+        "../Common/interface/db/*",
         "./src/Common/interface/db/*"
       ]
     },
