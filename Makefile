@@ -5,6 +5,11 @@ export NAME_UID=$(shell id -u -n)
 export GUID=$(shell id -g)
 export NAME_GUID=$(shell id -g -n)
 
+.PHONY: init
+init:
+	git submodule init
+	git submodule update
+
 .PHONY: build
 build:
 	docker-compose -f docker-compose.dev.yaml build --force-rm --parallel
