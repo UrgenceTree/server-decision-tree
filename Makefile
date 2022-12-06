@@ -13,7 +13,7 @@ init:
 
 .PHONY: pull-submodule
 pull-submodule:
-	git submodule update --remote Common
+	@cd Common; git pull; cd ..
 
 .PHONY: build
 build:
