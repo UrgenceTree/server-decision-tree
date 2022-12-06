@@ -1,0 +1,14 @@
+build
+node_modules
+
+.cache
+.yarn*
+*yarn*
+docker-compose.*.yaml
+Makefile
+.github
+
+Dockerfile*
+.dockerignore
+.gitignore
+README.md

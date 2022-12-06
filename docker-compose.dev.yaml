@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+
+  decision-tree:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '8000:3000'
+    volumes:
+      - type: bind
+        source: .
+        target: /home/node
+      - type: bind
+        source: ../Common/
+        target: /home/node/src/Common/
+    tty: true
+    links:
+      - "dev-db:link-db"
+    networks:
+      - urgencetree-decision-tree
+
+  dev-db:
+    ports:
+      - '8001:27017'
+    image: mongo:latest
+    volumes:
+      - ./db/db:/data/db
+      - ./db/config/dev-mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    env_file:
+      - ./development.env
+      - ./db/config/development.env
+    networks:
+      - urgencetree-decision-tree
+    restart: always
+
+
+  image-client:
+    image: urgencetree/web-client:latest
+    ports:
+      - '80:80'
+    tty: true
+
+networks:
+  urgencetree-decision-tree:
