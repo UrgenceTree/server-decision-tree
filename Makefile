@@ -8,7 +8,6 @@ export NAME_GUID=$(shell id -g -n)
 .PHONY: init
 init:
 	git config --global diff.submodule log
-	git submodule init
 	git submodule update
 
 .PHONY: pull-submodule
