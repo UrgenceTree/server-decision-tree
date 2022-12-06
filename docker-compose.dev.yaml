@@ -13,7 +13,7 @@ services:
         source: .
         target: /home/node
       - type: bind
-        source: ../Common/
+        source: ./Common/
         target: /home/node/src/Common/
     tty: true
     links:
