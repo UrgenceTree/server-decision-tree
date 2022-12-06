@@ -9,11 +9,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Save bot credentials
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.BOT_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 0700 ~/.ssh/id_rsa
+
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
