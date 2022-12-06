@@ -35,6 +35,12 @@ services:
       - urgencetree-decision-tree
     restart: always
 
+  image-decision-tree:
+    image: urgencetree/server-decision-tree:latest
+    ports:
+      - '8000:3000'
+    tty: true
+
 
   image-client:
     image: urgencetree/web-client:latest

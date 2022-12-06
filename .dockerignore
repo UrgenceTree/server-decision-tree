@@ -13,3 +13,8 @@ Dockerfile*
 .gitignore
 README.md
 db
+.git
+.dockerignore
+.git*
+*.env
+*.md

@@ -31,11 +31,9 @@ dev-db:
 dev-decision-tree:
 	docker-compose -f docker-compose.dev.yaml up --remove-orphans --build decision-tree
 
-# ############## CLIENT ##############
-
-# .PHONY:setup-client
-# setup-client:
-# 	docker-compose -f docker-compose.dev.yaml up -d --remove-orphans --build image-client
+.PHONY: test-image
+test-image: dev-db
+	docker-compose -f docker-compose.dev.yaml up -d --remove-orphans --build image-decision-tree
 
 ############################################ CLEAR ############################################
 
