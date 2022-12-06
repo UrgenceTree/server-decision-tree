@@ -1,5 +1,5 @@
 
-export COMPOSE_PROJECT_NAME=urgence-tree
+export COMPOSE_PROJECT_NAME=urgence-tree-tree
 export UID=$(shell id -u)
 export NAME_UID=$(shell id -u -n)
 export GUID=$(shell id -g)
@@ -23,16 +23,16 @@ build:
 
 ############## SERV ##############
 
-.PHONY: dev-db
-dev-db:
-	docker-compose -f docker-compose.dev.yaml up -d --remove-orphans --build dev-db
+.PHONY: dev-db-tree
+dev-db-tree:
+	docker-compose -f docker-compose.dev.yaml up -d --remove-orphans --build dev-db-tree
 
 .PHONY: dev-decision-tree
 dev-decision-tree:
 	docker-compose -f docker-compose.dev.yaml up --remove-orphans --build decision-tree
 
 .PHONY: test-image
-test-image: dev-db
+test-image: dev-db-tree
 	docker-compose -f docker-compose.dev.yaml up -d --remove-orphans --build image-decision-tree
 
 ############################################ CLEAR ############################################

@@ -17,11 +17,11 @@ services:
         target: /home/node/src/Common/
     tty: true
     links:
-      - "dev-db:link-db"
+      - "dev-db-tree:link-db-tree"
     networks:
       - urgencetree-decision-tree
 
-  dev-db:
+  dev-db-tree:
     ports:
       - '8001:27017'
     image: mongo:latest
