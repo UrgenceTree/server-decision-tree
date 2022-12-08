@@ -1,0 +1,14 @@
+[
+    {
+        "name":"Reda",
+        "Age":21,
+        "Urgences":"migraine",
+        "Heure":"10:38"
+    },
+    {
+        "name":"LePouilleux",
+        "Age":75,
+        "Urgences":"convulsion, mutation",
+        "Heure":"10:39"
+    }
+]
