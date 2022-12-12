@@ -5,15 +5,17 @@ class Decisional_tree:
         self.step = 0
         self.score = 0
         self.number_of_steps = 3
-        self.last_action = "Nothing"
+        self.last_action = "First"
         self.list_of_commands = []
         self.commands = {
             "MALAISE": self.is_malaise,
             "SYMPTOME": self.is_symptome,
             "CARDIAC_ARREST": self.is_cardiac_arrest,
-            "NONE": "Nothing"
+            "NONE": self.Nothing
         }
 
+    def Nothing(self):
+        self.last_action = "Nothing"
 
     def parse_conf(self):
         try:
@@ -44,7 +46,7 @@ class Decisional_tree:
 
             
     def ask_question(self): #question to ask from order of list and reponse yes or no will auomatically ask the right question
-        if (self.last_action == "Nothing"):
+        if (self.last_action == "First"):
             self.list_of_commands[self.step]["Question"]()
             self.step += 1
             return
@@ -86,11 +88,15 @@ class Decisional_tree:
         while loop_status:
             # Call ask_question
             # Have to update self.last_action to "yes" or "NO"
-            self.ask_question()
             line_input = input()
-            self.last_action = line_input
+            self.ask_question()
+            if self.last_action == "Nothing":
+                break
+            if line_input == "YES" or line_input == "NO":
+                self.last_action = line_input
 
             if str(line_input) == "SCORE":
+                self.step -= 1
                 self.get_score(loop_status)
 
             if str(line_input) == "QUIT":
@@ -100,10 +106,6 @@ class Decisional_tree:
 def main():
     tree = Decisional_tree()
     tree.parse_conf()
-
-    #tree.ask_question()        #my function to test the call of function already in the order given in the conf file
-    #tree.ask_question()        #my function to test the call of function already in the order given in the conf file
-    #tree.ask_question()        #my function to test the call of function already in the order given in the conf file
 
     tree.get_line_loop()
     
