@@ -39,3 +39,6 @@ db/db
 .yarn
 
 attr.txt
+
+# ranking
+__pycache__

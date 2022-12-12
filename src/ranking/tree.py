@@ -13,13 +13,8 @@ class Decisional_tree:
         self.action_order = []
 
     def parse_conf(self):
-        try:
-            conf_file = open("commands.conf", "r")
-            self.reorder_from_conf(conf_file)
-        except FileNotFoundError:
-            return
-        except AttributeError:
-            print("ERROR: Function given doesn't exist")
+        conf_file = open("commands.conf", "r")
+        self.reorder_from_conf(conf_file)
 
     def reorder_from_conf(self, file): #create a list of dictionary
         line = []
@@ -67,9 +62,17 @@ class Decisional_tree:
 
 def main():
     tree = Decisional_tree()
-    tree.parse_conf()
-    
-    tree.get_line_loop()
+    try:
+        tree.parse_conf()
+        tree.get_line_loop()
+    except KeyboardInterrupt:
+        return
+    except EOFError:
+        return
+    except FileNotFoundError:
+        return
+    except AttributeError:
+        print("ERROR: Function given doesn't exist")
     print("\nThe Score:", tree.score)
 
 if (__name__ == "__main__"):
