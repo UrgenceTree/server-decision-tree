@@ -56,13 +56,12 @@ class Decisional_tree:
             self.ask_question()
             if self.last_action == "Nothing":
                 break
-            line_input = input()
-            if line_input == "YES" or line_input == "NO":
-                self.last_action = line_input
+            if self.last_action == "YES" or self.last_action == "NO":
+                self.last_action = self.last_action
             else:
                 self.step -= 1
                 self.score -= 10
-            if str(line_input) == "QUIT":
+            if str(self.last_action) == "QUIT":
                 loop_status = False
 
 
@@ -71,7 +70,7 @@ def main():
     tree.parse_conf()
     
     tree.get_line_loop()
-    print("The Score:", tree.score)
+    print("\nThe Score:", tree.score)
 
 if (__name__ == "__main__"):
     main()
