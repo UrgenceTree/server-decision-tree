@@ -7,6 +7,7 @@ class Decisional_tree:
         self.number_of_steps = 3
         self.last_action = "First"
         self.list_of_commands = []
+        self.action_order = []
         self.commands = {
             "MALAISE": self.is_malaise,
             "SYMPTOME": self.is_symptome,
@@ -27,16 +28,21 @@ class Decisional_tree:
 
     def create_dictionary(self, line): #put in dictionary and after that we put it in a list of dictionary
         _dict = {}
+        #command = ["MALAISE", "CARDIAC_ARREST", "SYMPTOME"]
+        #if line[0] in command:
         match line[0]:
             case "MALAISE":
-                _dict = {"Question": self.is_malaise, "Order": int(line[1]), "YES": self.commands[line[3]], "yes": self.commands[line[3]], "NO": self.commands[line[5].strip()]}
+                _dict = {"Question": self.is_malaise, "Order": int(line[1]), "YES": self.commands[line[3]], "NO": self.commands[line[5].strip()]}
                 self.list_of_commands.append(_dict)
+                #self.action_order.append()
             case "CARDIAC_ARREST":
-                _dict = {"Question": self.is_cardiac_arrest, "Order": int(line[1]), "YES": self.commands[line[3]], "yes": self.commands[line[3]], "NO": self.commands[line[5].strip()]}
+                _dict = {"Question": self.is_cardiac_arrest, "Order": int(line[1]), "YES": self.commands[line[3]], "NO": self.commands[line[5].strip()]}
                 self.list_of_commands.append(_dict)
+                #self.action_order.append()
             case "SYMPTOME":
-                _dict = {"Question": self.is_symptome, "Order": int(line[1]), "YES": self.commands[line[3]], "yes": self.commands[line[3]], "NO": self.commands[line[5].strip()]}
+                _dict = {"Question": self.is_symptome, "Order": int(line[1]), "YES": self.commands[line[3]], "NO": self.commands[line[5].strip()]}
                 self.list_of_commands.append(_dict)
+                #self.action_order.append()
 
     def reorder_from_conf(self, file): #create a list of dictionary
         line = []
@@ -58,14 +64,15 @@ class Decisional_tree:
 
     def is_malaise(self):
         print("\nDid the victim fainted ?")
-        if (self.last_action == "YES") or (self.last_action == "yes"):
+        if (self.last_action == "YES" or self.last_action == "First"):
             self.score += 10
 
 
     def is_cardiac_arrest(self):
         print("\nIs the victim in cardiac arrest ?")
-        if (self.last_action == "YES") or (self.last_action == "yes"):
+        if (self.last_action == "YES" or self.last_action == "First"):
             self.score += 10
+            
 
 
     def is_symptome(self):
@@ -73,7 +80,7 @@ class Decisional_tree:
               "\t- Unconscious, don't speak anymore, don't open your eyes, don't watch, respond when you speak to him, reacts\n"
               "\t- Difficulty breathing, to other BP related to breathing\n"
               "\t- Signs of shock, pallor, sweating")
-        if (self.last_action == "YES") or (self.last_action == "yes"):
+        if (self.last_action == "YES" or self.last_action == "First"):
             self.score += 10
 
 
