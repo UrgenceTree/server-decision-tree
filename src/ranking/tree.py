@@ -77,9 +77,8 @@ class Decisional_tree:
             self.score += 10
 
 
-    def get_score(self, loop_status):
+    def get_score(self):
         print("Score =", self.score)
-        loop_status = False
 
 
     def get_line_loop(self):
@@ -88,17 +87,14 @@ class Decisional_tree:
         while loop_status:
             # Call ask_question
             # Have to update self.last_action to "yes" or "NO"
-            line_input = input()
             self.ask_question()
             if self.last_action == "Nothing":
                 break
+            line_input = input()
             if line_input == "YES" or line_input == "NO":
                 self.last_action = line_input
-
-            if str(line_input) == "SCORE":
+            else:
                 self.step -= 1
-                self.get_score(loop_status)
-
             if str(line_input) == "QUIT":
                 loop_status = False
 
@@ -108,6 +104,7 @@ def main():
     tree.parse_conf()
 
     tree.get_line_loop()
+    print("The Score:", tree.score)
     
 
 if (__name__ == "__main__"):
