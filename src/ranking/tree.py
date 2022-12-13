@@ -65,15 +65,15 @@ def main():
     try:
         tree.parse_conf()
         tree.get_line_loop()
+        print("\nThe Score:", tree.score)
     except KeyboardInterrupt:
-        return
+        print("ERROR: Keyboard Interrupt")
     except EOFError:
-        return
+        print("ERROR: End of File")
     except FileNotFoundError:
-        return
+        print("ERROR: File not found")
     except AttributeError:
         print("ERROR: Function given doesn't exist")
-    print("\nThe Score:", tree.score)
 
 if (__name__ == "__main__"):
     main()
