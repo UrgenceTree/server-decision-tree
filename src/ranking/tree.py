@@ -38,7 +38,6 @@ class Decisional_tree:
             self.step += 1
             return
         else:
-            print("YO " + self.last_action)
             self.list_of_commands[self.step - 1][self.last_action](self)
             self.step += 1
             return
