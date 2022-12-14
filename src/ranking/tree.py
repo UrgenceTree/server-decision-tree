@@ -13,7 +13,7 @@ class Decisional_tree:
         self.action_order = []
 
     def parse_conf(self):
-        conf_file = open("commands.conf", "r")
+        conf_file = open("../server-decision-tree/src/ranking/commands.conf", "r")
         self.reorder_from_conf(conf_file)
 
     def reorder_from_conf(self, file): #create a list of dictionary
@@ -29,7 +29,7 @@ class Decisional_tree:
             self.number_of_steps = int(line[1])
             return
         else:
-            _dict = {"Question": getattr(self.qt, line[0].capitalize()), "Order": int(line[1]), "YES": getattr(self.qt, line[3].capitalize()), "NO": getattr(self.qt, line[5].strip().capitalize())}
+            _dict = {"Question": getattr(self.qt, line[0].capitalize()), "Order": int(line[1]), "Yes.": getattr(self.qt, line[3].capitalize()), "No.": getattr(self.qt, line[5].strip().capitalize())}
             self.list_of_commands.append(_dict)
             
     def ask_question(self): #question to ask from order of list and reponse yes or no will auomatically ask the right question
@@ -38,6 +38,7 @@ class Decisional_tree:
             self.step += 1
             return
         else:
+            print("YO " + self.last_action)
             self.list_of_commands[self.step - 1][self.last_action](self)
             self.step += 1
             return
@@ -51,7 +52,7 @@ class Decisional_tree:
             self.ask_question()
             if self.last_action == "Nothing":
                 break
-            if self.last_action == "YES" or self.last_action == "NO":
+            if self.last_action == "Yes." or self.last_action == "No.":
                 self.last_action = self.last_action
             else:
                 self.step -= 1
@@ -62,18 +63,18 @@ class Decisional_tree:
 
 def main():
     tree = Decisional_tree()
-    try:
-        tree.parse_conf()
-        tree.get_line_loop()
-        print("\nThe Score:", tree.score)
-    except KeyboardInterrupt:
-        print("ERROR: Keyboard Interrupt")
-    except EOFError:
-        print("ERROR: End of File")
-    except FileNotFoundError:
-        print("ERROR: File not found")
-    except AttributeError:
-        print("ERROR: Function given doesn't exist")
+    # try:
+    tree.parse_conf()
+    tree.get_line_loop()
+    #     print("\nThe Score:", tree.score)
+    # except KeyboardInterrupt:
+    #     print("ERROR: Keyboard Interrupt")
+    # except EOFError:
+    #     print("ERROR: End of File")
+    # except FileNotFoundError:
+    #     print("ERROR: File not found")
+    # except AttributeError:
+    #     print("ERROR: Function given doesn't exist")
 
 if (__name__ == "__main__"):
     main()

@@ -7,16 +7,17 @@
 
 class Questions:
     def __init__(self):
-        self.answers = ["YES", "NO"]
+        self.answers = ["Yes.", "No."]
 
 
     def Malaise(self, tree):
         while 1:
             print("\nDid the victim fainted ?")     
-            line = input()
+            line = input().strip()
+            print("Line:", line)
             if line in self.answers:
                 break;
-        if (line == "YES"):
+        if (line == "Yes."):
             tree.score += 10
         tree.last_action = line
             
@@ -24,10 +25,10 @@ class Questions:
     def Cardiac_arrest(self, tree):
         while 1:
             print("\nIs the victim in cardiac arrest ?")     
-            line = input()
+            line = input().strip()
             if line in self.answers:
                 break;
-        if line == "YES":
+        if line == "Yes.":
             tree.score = 100
         tree.last_action = line
             
@@ -36,14 +37,14 @@ class Questions:
     def Symptome(self, tree):
         while 1:
             print("\nDoes the victim have any of the following symptoms ?\n"
-              "\t- Unconscious, don't speak anymore, don't open your eyes, don't watch, respond when you speak to him, reacts\n"
+              "\t- Unconscious, don't speak anymore, don't open your eYes., don't watch, respond when you speak to him, reacts\n"
               "\t- Difficulty breathing, to other BP related to breathing\n"
               "\t- Signs of shock, pallor, sweating")     
-            line = input()
+            line = input().strip()
             if line in self.answers:
                 break;    
         
-        if (line == "YES"):
+        if (line == "Yes."):
             tree.score += 10
         tree.last_action = line
             
