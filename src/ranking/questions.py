@@ -24,6 +24,7 @@ class Questions:
             tree.score += 10
             tree.last_action = "Yes."
             rq.update_situation("Malaise")
+            rq.update_score(tree.score)
         else:   
             tree.last_action = "No."
             
@@ -39,6 +40,7 @@ class Questions:
             tree.score = 100
             tree.last_action = "Yes."
             rq.update_situation("Cardiac arrest")
+            rq.update_score(tree.score)
         else:    
             tree.last_action = "No."
             
@@ -58,6 +60,7 @@ class Questions:
             tree.score += 10
             tree.last_action = "Yes." 
             rq.update_situation("Symptome")
+            rq.update_score(tree.score)
         else:   
             tree.last_action = "No."
             

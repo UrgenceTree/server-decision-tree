@@ -14,6 +14,7 @@ class request:
         self.url_patient = "http://localhost:8002/api/patient-info"
         self.url_status = "http://localhost:8002/api/patient-info/status/"
         self.url_situation = "http://localhost:8002/api/patient-info/situation/"
+        self.url_rank = "http://localhost:8002/api/patient-info/rank/"
         self.id = ""
         self.step = 0
     
@@ -41,4 +42,5 @@ class request:
     def update_score(self, nb):
         self.data["rank"] = nb
         data = {"rank": self.data["rank"]}
-        requests.put(self.url_situation, json=data, headers=self.header)
+        print(data)
+        requests.put(self.url_rank, json=data, headers=self.header)
