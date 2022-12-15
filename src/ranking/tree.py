@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 from questions import *
+from rq_handling import *
 import sys
-import requests
 import configparser
 
 class Decisional_tree:
     def __init__(self):
         self.qt = Questions()
+        self.rq = request()
         self.step = 0
         self.score = 0
         self.number_of_steps = 3
@@ -34,6 +35,8 @@ class Decisional_tree:
             exit(84)
         #print("serv_data_ip =", self.serv_data_ip)
         #print("serv_data_port =", self.serv_data_port)
+        self.name = ""
+        self.surname = ""
 
     def parse_conf(self):
         conf_file = open("../server-decision-tree/src/ranking/commands.conf", "r")
@@ -57,21 +60,27 @@ class Decisional_tree:
             
     def ask_question(self): #question to ask from order of list and reponse yes or no will auomatically ask the right question
         if (self.last_action == "First"):
-            self.list_of_commands[self.step]["Question"](self)
+            self.list_of_commands[self.step]["Question"](self, self.rq)
             self.step += 1
             return
         else:
-            self.list_of_commands[self.step - 1][self.last_action](self)
+            self.list_of_commands[self.step - 1][self.last_action](self, self.rq)
             self.step += 1
             return
 
     def get_line_loop(self):
         loop_status = True
 
+        #print("Qu'elle est votre prenom ?")
+        #self.name = input().strip()
+        #POST
+        self.rq.create_patient()
         while loop_status:
             # Call ask_question
             # Have to update self.last_action to "yes" or "NO"
             self.ask_question()
+            #PUT
+
             if self.last_action == "Nothing":
                 break
             if self.last_action == "Yes." or self.last_action == "No.":
@@ -85,9 +94,10 @@ class Decisional_tree:
 
 def main():
     tree = Decisional_tree()
-    # try:
+    ## try:
     tree.parse_conf()
     tree.get_line_loop()
+    tree.rq.update_status()
     
     # The function 'handle_env' get and set variables env to the class 'Decisional_tree'
     # and handle errors from env variables set in env/server_data_info.env

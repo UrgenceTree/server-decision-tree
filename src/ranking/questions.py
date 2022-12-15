@@ -12,7 +12,7 @@ class Questions:
         
 
 
-    def Malaise(self, tree):
+    def Malaise(self, tree, rq):
         while 1:
             print("\nDid the victim fainted ?")     
             line = input().strip()
@@ -23,12 +23,13 @@ class Questions:
         if (line in self.answers_yes):
             tree.score += 10
             tree.last_action = "Yes."
+            rq.update_situation("Malaise")
         else:   
             tree.last_action = "No."
             
             
 
-    def Cardiac_arrest(self, tree):
+    def Cardiac_arrest(self, tree, rq):
         while 1:
             print("\nIs the victim in cardiac arrest ?")     
             line = input().strip()
@@ -37,12 +38,13 @@ class Questions:
         if line in self.answers_yes:
             tree.score = 100
             tree.last_action = "Yes."
+            rq.update_situation("Cardiac arrest")
         else:    
             tree.last_action = "No."
             
         
 
-    def Symptome(self, tree):
+    def Symptome(self, tree, rq):
         while 1:
             print("\nDoes the victim have any of the following symptoms ?\n"
               "\t- Unconscious, don't speak anymore, don't open your eYes., don't watch, respond when you speak to him, reacts\n"
@@ -55,9 +57,10 @@ class Questions:
         if (line in self.answers_yes):
             tree.score += 10
             tree.last_action = "Yes." 
+            rq.update_situation("Symptome")
         else:   
             tree.last_action = "No."
             
     
-    def Nothing(self, tree):
+    def Nothing(self, tree, rq):
         tree.last_action = "Nothing"
