@@ -98,7 +98,7 @@ def main():
     tree.parse_conf()
     tree.get_line_loop()
     tree.rq.update_status()
-    
+    print("au revoir")
     # The function 'handle_env' get and set variables env to the class 'Decisional_tree'
     # and handle errors from env variables set in env/server_data_info.env
     #tree.handle_env()

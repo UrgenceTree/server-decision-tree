@@ -7,8 +7,8 @@
 
 class Questions:
     def __init__(self):
-        self.answers_yes = ["yes", "Yes."]
-        self.answers_no = ["no", "No."]
+        self.answers_yes = ["yes", "Yes.", "absolutely", "Absolutely." ,"indeed", "Indeed.", "totally", "Totally."]
+        self.answers_no = ["no", "No.", "not", "Not.", "is not", "He's not.", "he's not" ]
         
 
 
