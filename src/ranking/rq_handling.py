@@ -24,6 +24,7 @@ class request:
         self.id = str(response_in_json["data"]["_id"])
         self.url_status += self.id
         self.url_situation += self.id
+        self.url_rank += self.id
     
     def update_status(self):
         self.data["status"] = True
@@ -42,5 +43,4 @@ class request:
     def update_score(self, nb):
         self.data["rank"] = nb
         data = {"rank": self.data["rank"]}
-        print(data)
         requests.put(self.url_rank, json=data, headers=self.header)
