@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 from questions import *
+import sys
+import requests
+import configparser
 
 class Decisional_tree:
     def __init__(self):
@@ -11,6 +14,26 @@ class Decisional_tree:
         self.last_action = "First"
         self.list_of_commands = []
         self.action_order = []
+        self.serv_data_ip = ""
+        self.serv_data_port = 0
+
+
+    def init_env(self):
+        config = configparser.ConfigParser()
+        config.read('./env/serv_data_info.env')
+        self.serv_data_ip = config['server_data_info']['SERV_DATA_IP']
+        self.serv_data_port = config['server_data_info']['SERV_DATA_PORT']
+
+    def handle_env(self):
+        self.init_env()
+        if ((int(self.serv_data_port) < 1025) or (int(self.serv_data_port) > 65535)):
+            print("ERROR: The PORT in the env must be between 1025 and 65535", file=sys.stderr)
+            exit(84)
+        if (self.serv_data_ip == None):
+            print("ERROR: Bad ip adress", file=sys.stderr)
+            exit(84)
+        #print("serv_data_ip =", self.serv_data_ip)
+        #print("serv_data_port =", self.serv_data_port)
 
     def parse_conf(self):
         conf_file = open("../server-decision-tree/src/ranking/commands.conf", "r")
@@ -65,6 +88,11 @@ def main():
     # try:
     tree.parse_conf()
     tree.get_line_loop()
+    
+    # The function 'handle_env' get and set variables env to the class 'Decisional_tree'
+    # and handle errors from env variables set in env/server_data_info.env
+    #tree.handle_env()
+
     #     print("\nThe Score:", tree.score)
     # except KeyboardInterrupt:
     #     print("ERROR: Keyboard Interrupt")
