@@ -6,6 +6,7 @@ coverage
 
 # production
 build
+service
 
 # misc
 .DS_Store

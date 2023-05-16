@@ -1,0 +1,33 @@
+{
+    "starting_question": "What is your name?",
+    "questions": [
+        {
+            "What is your age?" : {
+                "yes_score": 100,
+                "no_score": 100,
+                "link": "What is your favorite color?"
+            }
+        },
+        {
+            "What is your name?" : {
+                "yes_score": 100,
+                "no_score": 100,
+                "link": "What is your age?"
+            }
+        },
+        {
+            "What is your favorite color?" : {
+                "yes_score": 100,
+                "no_score": 100,
+                "link": "What is your favorite car?"
+            }
+        },
+        {
+            "What is your favorite car?" : {
+                "yes_score": 100,
+                "no_score": 100,
+                "link": null
+            }
+        }
+    ]
+}
