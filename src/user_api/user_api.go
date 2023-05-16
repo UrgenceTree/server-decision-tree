@@ -1,9 +1,7 @@
 package user_api
 
 import (
-	"errors"
 	"fmt"
-	"log"
 	"os"
 	"service/tree"
 	"sync"
@@ -34,8 +32,7 @@ func (api *UserAPI) LoadTree(treeConfFilepath string) error {
 
 	// open and read file
 	if treeConfFile, err = os.Open(treeConfFilepath); err != nil {
-		log.Fatalf("Error opening tree config file: %s", err)
-		return errors.New("Error opening tree config file")
+		return fmt.Errorf("Error opening tree config file(%v), err=%s", treeConfFilepath, err)
 	}
 	defer treeConfFile.Close()
 

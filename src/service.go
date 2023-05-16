@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"service/user_api"
@@ -65,8 +66,10 @@ func (s *Service) LoadConfig(confFilepath string) error {
 		return err
 	}
 
+	s.Config = config
+
 	if err := s.uAPI.LoadTree(s.Config.TreeConfigFile); err != nil {
-		return fmt.Errorf("Error loading tree: %s", err)
+		return errors.New(err.Error())
 	}
 
 	fmt.Printf("serviceConfig : %+v\n", s.Config)

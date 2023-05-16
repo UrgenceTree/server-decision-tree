@@ -1,6 +1,42 @@
+# Service - User API Microservice
+
+This Go package provides a `Service` struct that encapsulates operations of a User API microservice, handling configuration loading and interfacing with the `UserAPI` object.
+
+## Structure
+
+1. `serviceConfig`: This struct holds the configuration required for the service, including RabbitMQ settings and UserAPI settings.
+2. `Service`: The main service object. It includes a `UserAPI` object and the service configuration.
+
+## Methods
+
+1. `NewService()`: This function returns a new instance of the `Service` struct, initializing a `UserAPI` object and setting an empty service configuration.
+
+2. `LoadConfig(configFilePath string)`: This function loads the service configuration from a JSON file. The file path is provided as an argument. The configuration file should match the `serviceConfig` structure.
+
+3. `(s *Service) LoadConfig(confFilepath string)`: This method loads the service configuration from a JSON file into the `Service` object. It also loads the decision tree configuration for the `UserAPI` object. The path to the configuration file is provided as an argument.
+
+## Usage
+
+Here is an example of how to use this package:
+
+```go
+package main
+
+func main() {
+    service := NewService()
+    err := service.LoadConfig("service_conf.json")
+    if err != nil {
+        log.Fatal("Error loading config: ", err)
+    }
+
+    // Now the service object is ready to be used.
+}
+```
+
 # Service Configuration Documentation
 
 This is the documentation for the configuration of our Golang service, which uses RabbitMQ as a message broker and has a User API for handling user-related operations.
+
 
 ## Configuration File
 
