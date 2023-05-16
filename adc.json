@@ -2,7 +2,7 @@
     "starting_question": "What is your name?",
     "questions": [
         {
-                "question" : "What_is_your_age?",
+                "question" : "What is your age?",
                 "yes_score": 100,
                 "no_score": 200,
                 "link": "What is your favorite color?"
