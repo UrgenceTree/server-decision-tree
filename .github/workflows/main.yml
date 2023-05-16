@@ -1,9 +1,6 @@
 name: ci
 
-on:
-  push:
-    branches-ignore:
-      - '*'
+on: push
 
 jobs:
   docker:
