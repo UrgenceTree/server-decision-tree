@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"service/user_api"
 )
@@ -72,10 +71,15 @@ func (s *Service) LoadConfig(confFilepath string) error {
 	s.Config = config
 
 	if err := s.uAPI.LoadTree(s.Config.TreeConfigFile); err != nil {
-		return errors.New(err.Error())
+		return err
 	}
 
-	LogInfo("function=Service::LoadConfig, message=Config file loaded: %+v", config)
+	prettyPrint, err := json.MarshalIndent(s.Config, "", "    ")
+	if err != nil {
+		return err
+	}
+
+	LogInfo("function=Service::LoadConfig, message=Config file loaded: %+v", string(prettyPrint))
 
 	return nil
 }
