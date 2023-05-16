@@ -36,7 +36,7 @@ var logSeverityNames = [...]string{
 }
 
 const (
-	LoggerTimeFormat     = "2006-01-02T15:04:05.000Z"
+	LoggerTimeFormat     = "2006-01-02T15:04:05.000"
 	LoggerFileTimeFormat = "06_01_02__15_04_05"
 )
 
@@ -45,14 +45,17 @@ const (
 var logServerHandler []SCLogger
 
 func (l LogSeverity) String() string {
+
 	return logSeverityNames[int(l)]
 }
 
 func AddLogger(l SCLogger) {
+
 	if err := l.Init(); err != nil {
 		LogWarn("function=AddLogger, error=%v", err)
 		return
 	}
+
 	logServerHandler = append(logServerHandler, l)
 }
 
@@ -88,9 +91,13 @@ func SetLogLevel(level LogSeverity) {
 }
 
 func TerminateLog() {
+
 	for _, handler := range logServerHandler {
 		handler.Term()
 	}
+
+	// clear logs
+	logServerHandler = []SCLogger{}
 }
 
 func Log(severity LogSeverity, fn string, line int, format string, a ...interface{}) {

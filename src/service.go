@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"service/user_api"
 )
@@ -32,6 +31,7 @@ type Service struct {
 }
 
 func NewService() *Service {
+
 	return &Service{
 		uAPI:   user_api.NewUserAPI(),
 		Config: serviceConfig{},
@@ -39,6 +39,7 @@ func NewService() *Service {
 }
 
 func LoadConfig(configFilePath string) (*serviceConfig, error) {
+
 	file, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
 		return nil, err
@@ -54,6 +55,8 @@ func LoadConfig(configFilePath string) (*serviceConfig, error) {
 }
 
 func (s *Service) LoadConfig(confFilepath string) error {
+
+	LogInfo("function=Service::LoadConfig, message=Loading config file: %s", confFilepath)
 
 	file, err := ioutil.ReadFile(confFilepath)
 	if err != nil {
@@ -72,7 +75,7 @@ func (s *Service) LoadConfig(confFilepath string) error {
 		return errors.New(err.Error())
 	}
 
-	fmt.Printf("serviceConfig : %+v\n", s.Config)
+	LogInfo("function=Service::LoadConfig, message=Config file loaded: %+v", config)
 
 	return nil
 }
