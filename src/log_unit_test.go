@@ -77,13 +77,13 @@ func TestAddLogger(t *testing.T) {
 	tLogger := &TestLogger{}
 
 	AddLogger(tLogger)
-	if len(logServerHandler) != 1 {
-		t.Errorf("First logger was not added correctly : %v", len(logServerHandler))
+	if len(logHandler) != 1 {
+		t.Errorf("First logger was not added correctly : %v", len(logHandler))
 	}
 
 	AddLogger(tLogger)
-	if len(logServerHandler) != 2 {
-		t.Errorf("Second logger was not added correctly : %v", len(logServerHandler))
+	if len(logHandler) != 2 {
+		t.Errorf("Second logger was not added correctly : %v", len(logHandler))
 	}
 }
 

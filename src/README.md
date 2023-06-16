@@ -23,6 +23,7 @@ Here is an example of how to use this package:
 package main
 
 func main() {
+
     service := NewService()
     err := service.LoadConfig("service_conf.json")
     if err != nil {

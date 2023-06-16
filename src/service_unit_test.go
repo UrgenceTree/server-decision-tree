@@ -4,49 +4,23 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
-	"service/user_api"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewService(t *testing.T) {
+
 	service := NewService()
 
 	assert.NotNil(t, service)
 	assert.IsType(t, &Service{}, service)
-	assert.IsType(t, &user_api.UserAPI{}, service.uAPI)
+	assert.IsType(t, &UserAPI{}, service.uAPI)
 	assert.IsType(t, serviceConfig{}, service.Config)
 }
 
-func TestLoadConfig(t *testing.T) {
-	// Create a temporary configuration file for the test
-	tempFile := createTempConfigFile(t)
-	defer removeTempFile(tempFile)
-
-	// Load the configuration
-	config, err := LoadConfig(tempFile)
-	if err != nil {
-		t.Fatalf("Error loading config: %s", err)
-	}
-
-	// Assert the values in the loaded configuration
-	expectedTreeConfigFile := "path/to/tree_config.json"
-	if config.TreeConfigFile != expectedTreeConfigFile {
-		t.Errorf("Expected TreeConfigFile to be %q, got %q", expectedTreeConfigFile, config.TreeConfigFile)
-	}
-
-	expectedRabbitMQURI := "amqp://guest:guest@localhost"
-	if config.RabbitMQ.URI != expectedRabbitMQURI {
-		t.Errorf("Expected RabbitMQ.URI to be %q, got %q", expectedRabbitMQURI, config.RabbitMQ.URI)
-	}
-
-	// Add more assertions for other fields as needed
-	// ...
-
-}
-
 func createTempConfigFile(t *testing.T) string {
+
 	config := serviceConfig{
 		TreeConfigFile: "path/to/tree_config.json",
 		RabbitMQ: struct {
@@ -58,8 +32,6 @@ func createTempConfigFile(t *testing.T) string {
 			QueueName: "myQueue",
 			Port:      "5672",
 		},
-		// Add other fields as needed
-		// ...
 	}
 
 	// Create a temporary file to hold the configuration
@@ -84,15 +56,17 @@ func createTempConfigFile(t *testing.T) string {
 }
 
 func removeTempFile(tempFile string) {
+
 	if tempFile != "" {
 		_ = os.Remove(tempFile)
 	}
 }
 
 func TestService_LoadConfig(t *testing.T) {
+
 	// Create a test instance of Service
 	s := &Service{
-		uAPI:   user_api.NewUserAPI(),
+		uAPI:   NewUserAPI(),
 		Config: serviceConfig{},
 	}
 
