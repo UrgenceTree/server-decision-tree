@@ -3,7 +3,10 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
+	"os"
+	"os/signal"
 	"sync"
+	"syscall"
 	"time"
 
 	"github.com/streadway/amqp"
@@ -59,6 +62,15 @@ func NewService() *Service {
 func (s *Service) Start() {
 
 	LogInfo("function=Service::Start, message=Starting service...")
+
+	// ctrl+c handler
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		sig := <-sigs
+		LogInfo("function=Service::Start, message=Received signal: %s. Stopping gently...", sig)
+		s.Stop()
+	}()
 
 	if err := s.rabbitMQInit(); err != nil {
 		LogFatal("function=Service::Start, error=%v", err.Error())
@@ -128,7 +140,6 @@ func (s *Service) rabbitMQInit() error {
 		LogFatal("function=Service::connectToRabbitMQ, error=%v", err.Error())
 		return err
 	}
-	defer s.conn.Close()
 	LogSuccess("function=Service::rabbitMQInit, message=Connected to RabbitMQ")
 
 	LogInfo("function=Service::rabbitMQInit, message=Creating channel...")
@@ -136,17 +147,16 @@ func (s *Service) rabbitMQInit() error {
 		LogFatal("function=Service::createChannel, error=%v", err.Error())
 		return err
 	}
-	defer s.ch.Close()
 	LogSuccess("function=Service::rabbitMQInit, message=Channel created")
 
 	LogInfo("function=Service::rabbitMQInit, message=Declaring queue...")
 	s.q, err = s.ch.QueueDeclare(
-		"test", // name
-		false,  // durable?
-		false,  // delete when unused?
-		false,  // exclusive?
-		false,  // no-wait?
-		nil,    // arguments
+		"decision_tree", // name
+		false,           // durable?
+		false,           // delete when unused?
+		false,           // exclusive?
+		false,           // no-wait?
+		nil,             // arguments
 	)
 	if err != nil {
 		LogError("function=Service::declareQueue, error=%v", err.Error())

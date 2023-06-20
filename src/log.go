@@ -18,7 +18,8 @@ type Logger interface {
 
 var gNoTimestamp bool = false
 var gNoFilePath bool = false
-var gNoPartielFilePath bool = true
+var gSmallFp bool = true
+var gPartielFilePathToRemove = ""
 var gNoColor bool = false
 var gLogLevel LogSeverity = LogSeverityInfo
 
@@ -33,13 +34,13 @@ const (
 )
 
 var logSeverityNames = [...]string{
-	"[ debug ]",
-	"[ stats ]",
-	"[ info  ]",
-	"[ success ]",
-	"[ warn  ]",
-	"[ error ]",
-	"[ fatal ]",
+	"[debug]",
+	"[stats]",
+	"[info]",
+	"[success]",
+	"[warn]",
+	"[error]",
+	"[fatal]",
 }
 
 const (
@@ -121,7 +122,11 @@ func Log(severity LogSeverity, fn string, line int, format string, a ...interfac
 		b.WriteString(time.Now().UTC().Format(LoggerTimeFormat))
 		b.WriteString(" : ")
 	}
-	if !gNoPartielFilePath {
+	if gSmallFp {
+		if strings.Contains(fn, gPartielFilePathToRemove) {
+			fn = fn[len(gPartielFilePathToRemove):]
+		}
+
 		b.WriteString(fmt.Sprintf("%s:%v", fn[strings.LastIndex(fn, "/")+1:], line))
 		b.WriteString(" : ")
 	} else if !gNoFilePath {
@@ -209,12 +214,20 @@ func LogFatal(format string, a ...interface{}) {
 	Log(LogSeverityFatal, fn, line, format, a...)
 }
 
+func GetRootPath() string {
+
+	_, fn, _, _ := runtime.Caller(1)
+	return fn[:strings.LastIndex(fn, "/")]
+}
+
 func InitLogger() {
+
+	gPartielFilePathToRemove = GetRootPath()
 
 	// Define the logger flag with default values
 	loggerFlag := flag.Bool("logger", false, "Enable custom logger settings")
-	noFilePath := flag.Bool("no_file_path", false, "Disable file path logging")
-	noPartialFilepath := flag.Bool("partial_file_path", false, "Disable partial file path logging")
+	noFp := flag.Bool("no_fp", false, "Disable file path logging")
+	smallFp := flag.Bool("small_fp", false, "Disable partial file path logging")
 	noTimestamp := flag.Bool("no_timestamp", false, "Disable timestamp logging")
 	noColor := flag.Bool("no_color", false, "Disable color logging")
 	logLevel := flag.String("log_level", "INFO", "Set log level")
@@ -226,12 +239,12 @@ func InitLogger() {
 	if *loggerFlag {
 		LogDebug("function=main, message=Logger flag provided")
 
-		gNoFilePath = *noFilePath
+		gNoFilePath = *noFp
 		gNoColor = *noColor
 		gNoTimestamp = *noTimestamp
-		gNoPartielFilePath = *noPartialFilepath
+		gSmallFp = *smallFp
 
-		println("no partial file path", gNoPartielFilePath)
+		println("partial file path", gSmallFp)
 
 		SetLogLevelString(*logLevel)
 	}
