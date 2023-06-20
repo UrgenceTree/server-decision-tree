@@ -51,7 +51,7 @@ class Decisional_tree:
         self.surname = ""
 
     def parse_conf(self):
-        conf_file = open("commands.conf", "r")
+        conf_file = open("./python_part/commands.conf", "r")
         self.reorder_from_conf(conf_file)
 
     def reorder_from_conf(self, file): #create a list of dictionary

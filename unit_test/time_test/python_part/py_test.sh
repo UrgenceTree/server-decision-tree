@@ -6,7 +6,7 @@ echo "yes" >> data_answer.txt
 echo "yes" >> data_answer.txt
 
 # Exécution du script à tester
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 # Vérification du résultat
 expected_output="Score final du patient : 110"
@@ -26,7 +26,7 @@ echo "yes" > data_answer.txt
 echo "yes" >> data_answer.txt
 echo "no" >> data_answer.txt
 
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 expected_output="Score final du patient : 110"
 if [[ "$output" == "$expected_output" ]]; then
@@ -44,7 +44,7 @@ echo "yes" > data_answer.txt
 echo "no" >> data_answer.txt
 echo "no" >> data_answer.txt
 
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 expected_output="Score final du patient : 10"
 if [[ "$output" == "$expected_output" ]]; then
@@ -62,7 +62,7 @@ echo "yes" > data_answer.txt
 echo "no" >> data_answer.txt
 echo "yes" >> data_answer.txt
 
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 expected_output="Score final du patient : 20"
 if [[ "$output" == "$expected_output" ]]; then
@@ -80,7 +80,7 @@ echo "no" >> data_answer.txt
 echo "no" >> data_answer.txt
 
 # Exécution du script à tester
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 # Vérification du résultat
 expected_output="Score final du patient : 0"
@@ -100,7 +100,7 @@ echo "no" > data_answer.txt
 echo "no" >> data_answer.txt
 echo "yes" >> data_answer.txt
 
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 expected_output="Score final du patient : 0"
 if [[ "$output" == "$expected_output" ]]; then
@@ -118,7 +118,7 @@ echo "no" > data_answer.txt
 echo "yes" >> data_answer.txt
 echo "yes" >> data_answer.txt
 
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 expected_output="Score final du patient : 0"
 if [[ "$output" == "$expected_output" ]]; then
@@ -136,7 +136,7 @@ echo "no" > data_answer.txt
 echo "yes" >> data_answer.txt
 echo "no" >> data_answer.txt
 
-output=$(./tree.py -f data_answer.txt)
+output=$(./python_part/tree.py -f data_answer.txt)
 
 expected_output="Score final du patient : 0"
 if [[ "$output" == "$expected_output" ]]; then
