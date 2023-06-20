@@ -28,73 +28,54 @@ func NewQuestions() *Questions {
 }
 
 func (q *Questions) Malaise(tree *Tree, rq *Request) {
-	var line string
     for {
-        fmt.Println("\nDid the victim fainted ?")
+        fmt.Println("Did the victim fainted ?")
         line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
         line = strings.TrimSpace(line)
-        if contains(q.answers_yes, line) || contains(q.answers_no, line) {
+        if contains(q.answers_yes, line) {
+            tree.score += 10
+            tree.last_action = "Yes."
+            break
+        } else if contains(q.answers_no, line) {
+            tree.last_action = "No."
             break
         }
-    }
-    if contains(q.answers_yes, line) {
-        tree.score += 10
-        tree.last_action = "Yes."
-		// rq.update_situation("Malaise")
-		// rq.update_score(tree.score)
-    } else {
-        tree.last_action = "No."
     }
 }
 
 func (q *Questions) Cardiac_arrest(tree *Tree, rq *Request) {
-	var line string
     for {
         fmt.Println("\nIs the victim in cardiac arrest ?")
         line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
         line = strings.TrimSpace(line)
-        if contains(q.answers_yes, line) || contains(q.answers_no, line) {
+        if contains(q.answers_yes, line) {
+            tree.score += 100
+            tree.last_action = "Yes."
+            break
+        } else if contains(q.answers_no, line) {
+            tree.last_action = "No."
             break
         }
-    }
-    if contains(q.answers_yes, line) {
-        tree.score = 100
-        tree.last_action = "Yes."
-		// rq.update_situation("Cardiac arrest")
-		// rq.update_score(tree.score)
-    } else {
-        tree.last_action = "No."
     }
 }
 
 func (q *Questions) Symptome(tree *Tree, rq *Request) {
-	var line string
     for {
         fmt.Println("\nDoes the victim have any of the following symptoms ?\n" +
-            "\t- Unconscious, don't speak anymore, don't open your eYes., don't watch, respond when you speak to him, reacts\n" +
+            "\t- Unconscious, don't speak anymore, don't open your eyes., don't watch, respond when you speak to him, reacts\n" +
             "\t- Difficulty breathing, to other BP related to breathing\n" +
             "\t- Signs of shock, pallor, sweating")
         line, _ := bufio.NewReader(os.Stdin).ReadString('\n')
         line = strings.TrimSpace(line)
         if contains(q.answers_yes, line) {
+            tree.score += 10
+            tree.last_action = "Yes."
+            break
+        } else if contains(q.answers_no, line) {
+            tree.last_action = "No."
             break
         }
-		if contains(q.answers_no, line) {
-            return
-        }
     }
-    if contains(q.answers_yes, line) {
-        tree.score += 10
-        tree.last_action = "Yes."
-		// rq.update_situation("Symptome")
-		// rq.update_score(tree.score)
-    } else {
-        tree.last_action = "No."
-    }
-}
-
-func (q *Questions) Nothing(tree *Tree, rq *Request) {
-    tree.last_action = "Nothing"
 }
 
 func contains(slice []string, s string) bool {
@@ -110,8 +91,9 @@ func main() {
     questions := NewQuestions()
     tree := &Tree{}
     rq := &Request{}
+
     questions.Malaise(tree, rq)
     questions.Cardiac_arrest(tree, rq)
     questions.Symptome(tree, rq)
-    questions.Nothing(tree, rq)
+    fmt.Println("Score final du patient :", tree.score)
 }
