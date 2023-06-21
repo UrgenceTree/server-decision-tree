@@ -1,14 +1,18 @@
-# Golang-like Documentation
+# DECISION TREE SERVICE
+
 ## Overview
+
 This is a Go file that implements a service with RabbitMQ integration and provides functionality related to user management. The service connects to RabbitMQ, declares a queue, and consumes messages from the queue. It also loads a configuration file and initializes a UserAPI component.
 
 ## Prerequisites
+
 Before using this code, make sure you have the following components set up:
 
 - RabbitMQ: Ensure that RabbitMQ is running and accessible at amqp://guest:guest@localhost:5672/.
 - Configuration File: Prepare a JSON configuration file containing the necessary settings for the service.
 
 ## Installation
+
 To use this code, follow these steps:
 
 1. Install Go: Make sure you have Go installed on your system.
@@ -19,6 +23,7 @@ To use this code, follow these steps:
 6. Install the necessary dependencies by running the command: go get -u github.com/streadway/amqp.
 
 ## Usage
+
 To use this code, follow these steps:
 
 1. Import the necessary packages in your Go code:
@@ -71,6 +76,7 @@ service.Wait()
 ```
 
 ## Examples
+
 Here are some examples of how to use the provided code:
 
 ### Example 1: Basic Usage
@@ -160,6 +166,6 @@ func main() {
 - rabbitMQInit() error: Initializes the RabbitMQ connection, creates a channel, and declares a queue.
 - rolling() error: Represents the rolling process that continuously consumes messages from the RabbitMQ queue, handles received messages, and performs rolling operations.
 
-# Conclusion
+## Conclusion
 
-This documentation provides an overview of the Go code that implements a service with RabbitMQ integration. It explains the usage, provides example scenarios, and describes the available functions and methods. By following the provided instructions, you can utilize this code in your own Go projects and customize it according to your requirements.
+This documentation provides an overview of the service.go file that implements a service with RabbitMQ integration. It explains the usage, provides example scenarios, and describes the available functions and methods. By following the provided instructions, you can utilize this code in your own Go projects and customize it according to your requirements.
