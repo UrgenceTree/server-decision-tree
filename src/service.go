@@ -124,7 +124,7 @@ func (s *Service) LoadConfig(confFilepath string) error {
 		return err
 	}
 
-	LogInfo("function=Service::LoadConfig, message=Config file loaded: %+v", string(prettyPrint))
+	LogSuccess("function=Service::LoadConfig, message=Config file loaded: %+v", string(prettyPrint))
 
 	return nil
 }
@@ -203,8 +203,6 @@ func (s *Service) rolling() error {
 		case <-time.After(5 * time.Second):
 			LogInfo("function=Service::rolling, message=Service decision tree rolling...")
 
-		default:
-			continue
 		}
 	}
 }
