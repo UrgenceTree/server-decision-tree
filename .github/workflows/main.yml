@@ -3,7 +3,7 @@ name: Docker Build
 on:
   push:
     branches:
-      - origin/USDT-34-Github-action-dockerfile
+      - USDT-34-Github-action-dockerfile
 
 jobs:
   build:
