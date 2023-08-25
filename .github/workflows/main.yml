@@ -16,13 +16,3 @@ jobs:
 
     - name: Build Docker Image
       run: docker build -t sdt_questions_img .
-
-    # You can add additional steps here, such as running tests on the image.
-
-    - name: Save Docker Image as Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: docker-image
-        path: |
-          /var/lib/docker
-          /var/run/docker.sock
