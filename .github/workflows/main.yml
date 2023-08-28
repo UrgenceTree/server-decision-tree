@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - USDT-34-Github-action-dockerfile
+      - dev
 
 jobs:
   build-img:
