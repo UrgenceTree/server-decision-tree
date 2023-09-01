@@ -27,7 +27,9 @@ func NewQuestions() *Questions {
 }
 
 func (q *Questions) Malaise(tree *Tree, rq *Request, input string) {
+	fmt.Println("Did the victim fainted ?")
 	line := strings.TrimSpace(input)
+	fmt.Println(line)
 	if contains(q.answers_yes, line) {
 		tree.score += 10
 		tree.last_action = "Yes."
@@ -37,7 +39,9 @@ func (q *Questions) Malaise(tree *Tree, rq *Request, input string) {
 }
 
 func (q *Questions) Cardiac_arrest(tree *Tree, rq *Request, input string) {
+	fmt.Println("\nIs the victim in cardiac arrest ?")
 	line := strings.TrimSpace(input)
+	fmt.Println(line)
 	if contains(q.answers_yes, line) {
 		tree.score += 100
 		tree.last_action = "Yes."
@@ -47,7 +51,12 @@ func (q *Questions) Cardiac_arrest(tree *Tree, rq *Request, input string) {
 }
 
 func (q *Questions) Symptome(tree *Tree, rq *Request, input string) {
+	fmt.Println("\nDoes the victim have any of the following symptoms ?\n" +
+            "\t- Unconscious, don't speak anymore, don't open your eyes., don't watch, respond when you speak to him, reacts\n" +
+            "\t- Difficulty breathing, to other BP related to breathing\n" +
+            "\t- Signs of shock, pallor, sweating")
 	line := strings.TrimSpace(input)
+	fmt.Println(line)
 	if contains(q.answers_yes, line) {
 		tree.score += 10
 		tree.last_action = "Yes."
