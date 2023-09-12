@@ -3,7 +3,7 @@ package main
 import (
     "bufio"
     "fmt"
-    "io/ioutil"
+    //"io/ioutil"
     "log"
     "os"
     "strconv"
@@ -23,36 +23,36 @@ type DecisionalTree struct {
 	surname          string
 }
 
-func (tree *DecisionalTree) initEnv() {
-    data, err := ioutil.ReadFile(".env")
-    if err != nil {
-        log.Fatal(err)
-    }
-    envVars := strings.Split(string(data), "\n")
-    for _, envVar := range envVars {
-        splitVar := strings.Split(envVar, "=")
-        if len(splitVar) == 2 {
-            switch splitVar[0] {
-            case "SERV_DATA_IP":
-                tree.servDataIP = splitVar[1]
-            case "SERV_DATA_PORT":
-                port, err := strconv.Atoi(splitVar[1])
-                if err != nil {
-                    log.Fatal(err)
-                }
-                if port < 1025 || port > 65535 {
-                    fmt.Fprintln(os.Stderr, "ERROR: The PORT in the env must be between 1025 and 65535")
-                    os.Exit(84)
-                }
-                tree.servDataPort = port
-            }
-        }
-    }
-    if tree.servDataIP == "" {
-        fmt.Fprintln(os.Stderr, "ERROR: Bad ip adress")
-        os.Exit(84)
-    }
-}
+//func (tree *DecisionalTree) initEnv() {
+//    data, err := ioutil.ReadFile(".env")
+//    if err != nil {
+//        log.Fatal(err)
+//    }
+//    envVars := strings.Split(string(data), "\n")
+//    for _, envVar := range envVars {
+//        splitVar := strings.Split(envVar, "=")
+//        if len(splitVar) == 2 {
+//            switch splitVar[0] {
+//            case "SERV_DATA_IP":
+//                tree.servDataIP = splitVar[1]
+//            case "SERV_DATA_PORT":
+//                port, err := strconv.Atoi(splitVar[1])
+//                if err != nil {
+//                    log.Fatal(err)
+//                }
+//                if port < 1025 || port > 65535 {
+//                    fmt.Fprintln(os.Stderr, "ERROR: The PORT in the env must be between 1025 and 65535")
+//                    os.Exit(84)
+//                }
+//                tree.servDataPort = port
+//            }
+//        }
+//    }
+//    if tree.servDataIP == "" {
+//        fmt.Fprintln(os.Stderr, "ERROR: Bad ip adress")
+//        os.Exit(84)
+//    }
+//}
 
 func (tree *DecisionalTree) handleEnv() {
     tree.listOfCommands = make([]map[string]string, 0)

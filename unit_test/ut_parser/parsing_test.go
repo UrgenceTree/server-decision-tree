@@ -127,3 +127,45 @@ NOTHING`
 		t.Errorf("Expected output:\n%s\nBut got:\n%s", expectedOutput, out)
 	}
 }
+
+//func TestInitEnv(t *testing.T) {
+//	createTestEnvFile(t)
+//	defer os.Remove(".env")
+//
+//	tree := &DecisionalTree{}
+//	tree.initEnv()
+//
+//	if tree.servDataIP != "SERV_DATA_IP_VALUE" {
+//		t.Errorf("Expected SERV_DATA_IP_VALUE, but got %s", tree.servDataIP)
+//	}
+//
+//	if tree.servDataPort != SERV_DATA_PORT_VALUE {
+//		t.Errorf("Expected SERV_DATA_PORT_VALUE, but got %d", tree.servDataPort)
+//	}
+//}
+//
+//func TestMainFunctionInvalidEnv(t *testing.T) {
+//	// Create an invalid test environment file
+//	content := []byte(`INVALID_ENV_VAR=INVALID_VALUE`)
+//	err := ioutil.WriteFile(".env", content, 0644)
+//	if err != nil {
+//		t.Fatal(err)
+//	}
+//	defer os.Remove(".env")
+//
+//	oldStdout := os.Stdout
+//	r, w, _ := os.Pipe()
+//	os.Stdout = w
+//
+//	main()
+//
+//	w.Close()
+//	out, _ := ioutil.ReadAll(r)
+//	os.Stdout = oldStdout
+//
+//	expectedOutput := "ERROR: Bad ip address\n"
+//
+//	if string(out) != expectedOutput {
+//		t.Errorf("Expected output:\n%s\nBut got:\n%s", expectedOutput, out)
+//	}
+//}
