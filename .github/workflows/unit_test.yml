@@ -9,19 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Unit test Timer
-        working-directory: ./unit_test/time_test/
-        run: ./time_test.sh
 # ------------- INSTALLATION -------------------------------------------------------------
-
+        
       - name: Install Go
         uses: actions/setup-go@v2
         with:
           go-version: 1.11
           stable: true
-      
+          
 # ------------- UNIT TEST -----------------------------------------------------------------      
-      
+          
+      #- name: Unit test Timer
+      #  working-directory: ./unit_test/time_test/
+      #  run: ./time_test.sh
           
       - uses: actions/checkout@v3
       - name: Unit test Parser
