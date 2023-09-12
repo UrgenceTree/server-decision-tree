@@ -1,0 +1,20 @@
+name: Check Project
+
+on:
+  push:
+    branches: [ "USDT-17-Github-action-unit_test" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Unit test Timer
+      run: cd unit_test/time_test/;./time_test.sh 
+    
+    - uses: actions/checkout@v3
+    - name: Unit test Parser
+      run: cd unit_test/ut_parser/;go test -v -timeout 10s; go test -cover -timeout 10s;go test -count 1000 -timeout 10s;
