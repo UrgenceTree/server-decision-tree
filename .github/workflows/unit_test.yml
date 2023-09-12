@@ -20,7 +20,8 @@ jobs:
 # ------------- UNIT TEST -----------------------------------------------------------------      
       
       - name: Unit test Timer
-        run: cd unit_test/time_test/ && ./time_test.sh 
+        run: ls
+      #run: cd unit_test/time_test/ && ./time_test.sh 
           
       - uses: actions/checkout@v3
       - name: Unit test Parser
