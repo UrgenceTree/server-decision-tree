@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Unit test Timer
-        working-directory: ./unittest/time_test/
+        working-directory: ./unit_test/time_test/
         run: ./time_test.sh
 # ------------- INSTALLATION -------------------------------------------------------------
 
