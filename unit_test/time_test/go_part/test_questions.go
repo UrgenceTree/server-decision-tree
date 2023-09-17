@@ -82,7 +82,7 @@ func main() {
 	filename := os.Args[1] 
 	file, err := os.Open(filename)
 	if err != nil {
-		fmt.Println("Erreur lors de l'ouverture du fichier :", err)
+		fmt.Fprintln(os.Stderr, "Erreur lors de l'ouverture du fichier :", err)
 		return
 	}
 	defer file.Close()
