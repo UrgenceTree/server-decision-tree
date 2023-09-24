@@ -64,7 +64,7 @@ func fill_links(questions []interface{}, elem *json_content) {
 //    }
 //}
 
-func tmpMain() {
+func main() {
 	jsonFile, err := os.Open("adc.json")
 	if err != nil {
 		fmt.Println(err)
@@ -83,14 +83,57 @@ func tmpMain() {
 	fill_questions(questions, &elem)
 	fill_links(questions, &elem)
 
-	//fmt.Println(elem.FirstQuestion)
-	//fmt.Println(elem.YesScore)
-	//fmt.Println(elem.NoScore)
-	//fmt.Println(elem.Questions)
-	//fmt.Println(elem.Link)
+	var responses []string
+	var firstResponse string
+	var secondResponse string
 
 	fmt.Printf("Question 1: %s\n", elem.FirstQuestion)
-	for i := 0; i < len(elem.Questions); i++ {
-		fmt.Printf("Question %d: %s, Yes: %.0f, No: %.0f, Link: %s\n", i+2, elem.Questions[i], elem.YesScore[i], elem.NoScore[i], elem.Link[i])
+	fmt.Scanln(&firstResponse)
+	responses = append(responses, firstResponse)
+
+	fmt.Printf("\nQuestion %d: %s\n", 2, elem.Questions[0])
+	fmt.Scanln(&secondResponse)
+	responses = append(responses, secondResponse)
+
+	// Ask questions
+	i := 2
+	for i < len(elem.Questions) {
+		fmt.Printf("\nQuestion %d: %s\n", i+1, elem.Questions[i])
+		//fmt.Print("Enter your response (Yes/No): ")
+
+		var response string
+		fmt.Scanln(&response)
+		responses = append(responses, response)
+
+		//var nextQuestionIndex int
+
+		//if response == "Yes" {
+		//	fmt.Printf("Yes Score: %.0f\n", elem.YesScore[i])
+		//	nextQuestionIndex = int(elem.YesScore[i])
+		//} else if response == "No" {
+		//	fmt.Printf("No Score: %.0f\n", elem.NoScore[i])
+		//	nextQuestionIndex = int(elem.NoScore[i])
+		//} else {
+		//	fmt.Println("Invalid response. Please enter either 'Yes' or 'No'.")
+		//	continue
+		//}
+
+		if elem.Link[i] == "null" {
+			fmt.Println("\nEnd of questions.\n")
+			break
+		}
+
+		//if nextQuestionIndex < 0 || nextQuestionIndex >= len(elem.Questions) {
+		//	fmt.Println("End of questions.")
+		//	break
+		//}
+
+		//fmt.Printf("Next Question: %s\n", elem.Questions[i+1])
+		//i = nextQuestionIndex
+		i++
+	}
+
+	for i, response := range responses {
+		fmt.Printf("Response %d: %s\n", i, response)
 	}
 }

@@ -46,3 +46,6 @@ attr.txt
 
 # src
 __pycache__
+
+# SonarQube cache files
+.scannerwork
