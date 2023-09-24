@@ -187,6 +187,7 @@ func (s *Service) rolling() error {
 		LogError("function=Service::bindQueue, error=%v", err.Error())
 		return err
 	}
+
 	LogSuccess("function=Service::rabbitMQInit, message=Queue bound")
 
 	for {

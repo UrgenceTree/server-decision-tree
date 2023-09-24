@@ -2,10 +2,12 @@ package main
 
 func init() {
 
-	// InitLogger()
+	InitLogger()
 }
 
 func main() {
+
+	AddLogger(NewFileLogger("decision_tree.log"))
 
 	var s *Service = NewService()
 

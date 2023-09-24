@@ -3,12 +3,21 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"os"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"time"
 )
 
 type LogSeverity int
+
+type FileLogger struct {
+	filename string
+	file     *os.File
+	logger   *log.Logger
+}
 
 type Logger interface {
 	Init() error
@@ -18,7 +27,7 @@ type Logger interface {
 
 var gNoTimestamp bool = false
 var gNoFilePath bool = false
-var gSmallFp bool = true
+var gSmallFp bool = false
 var gPartielFilePathToRemove = ""
 var gNoColor bool = false
 var gLogLevel LogSeverity = LogSeverityInfo
@@ -51,6 +60,47 @@ const (
 // Default Logger
 
 var logHandler []Logger
+
+func NewFileLogger(fileName string) *FileLogger {
+
+	timestamp := time.Now().Format("2006-01-02_15-04-05")
+	filename := fmt.Sprintf("logs/"+fileName+"_%s.log", timestamp)
+
+	LogInfo("Creating new file logger with filename %s", filename)
+
+	return &FileLogger{filename: filename}
+}
+
+func (l *FileLogger) Term() {
+
+	l.file.Close()
+}
+
+func (l *FileLogger) PrintLog(value string) {
+
+	l.logger.Println(value)
+}
+
+func (l *FileLogger) Init() error {
+
+	dir := filepath.Dir(l.filename)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		err = os.MkdirAll(dir, 0755)
+		if err != nil {
+			return err
+		}
+	}
+
+	file, err := os.OpenFile(l.filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+
+	l.file = file
+	l.logger = log.New(file, "", 0)
+
+	return nil
+}
 
 func (l LogSeverity) String() string {
 
@@ -150,9 +200,7 @@ func Log(severity LogSeverity, fn string, line int, format string, a ...interfac
 		case LogSeverityFatal:
 			b.WriteString(severity.String()) // special case
 		}
-	}
-	if gNoColor {
-		println("no color")
+	} else {
 		b.WriteString(severity.String())
 	}
 
@@ -227,7 +275,7 @@ func InitLogger() {
 	// Define the logger flag with default values
 	loggerFlag := flag.Bool("logger", false, "Enable custom logger settings")
 	noFp := flag.Bool("no_fp", false, "Disable file path logging")
-	smallFp := flag.Bool("small_fp", false, "Disable partial file path logging")
+	smallFp := flag.Bool("small_fp", false, "Enable partial file path logging")
 	noTimestamp := flag.Bool("no_timestamp", false, "Disable timestamp logging")
 	noColor := flag.Bool("no_color", false, "Disable color logging")
 	logLevel := flag.String("log_level", "INFO", "Set log level")
@@ -243,8 +291,6 @@ func InitLogger() {
 		gNoColor = *noColor
 		gNoTimestamp = *noTimestamp
 		gSmallFp = *smallFp
-
-		println("partial file path", gSmallFp)
 
 		SetLogLevelString(*logLevel)
 	}
