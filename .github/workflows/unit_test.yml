@@ -20,7 +20,7 @@ jobs:
 # ------------- UNIT TEST -----------------------------------------------------------------      
           
       - name: Unit test Timer
-        working-directory: ./unit_test/ut_parser/
+        working-directory: unit_test/ut_parser/
         run: ls
           
       - uses: actions/checkout@v3
