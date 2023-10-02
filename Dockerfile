@@ -17,7 +17,7 @@ RUN chown admin:admin /sdt_app
 COPY . .
 
 # Initialisation d'un nouveau module Go
-RUN go mod init v0
+RUN rm go.mod && go mod init v0
 
 # Copie d'un repertoire
 COPY ./unit_test/time_test/go_part/* ./src
