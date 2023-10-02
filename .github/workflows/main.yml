@@ -5,6 +5,7 @@ on:
     branches:
       - USDT-34-Github-action-dockerfile
       - dev
+      - main
 
 jobs:
   build-img:
