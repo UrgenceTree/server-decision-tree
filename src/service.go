@@ -199,7 +199,10 @@ func (s *Service) rolling() error {
 
 		case msg := <-s.msgs:
 			LogInfo("function=Service::rolling, message=Received message: %s", msg.Body)
-			//s.uAPI.HandleUser(msg.Body)
+			userMessage := &UserMessage{
+				Text: string(msg.Body),
+			}
+			s.uAPI.HandleUser(userMessage)
 
 		case <-time.After(5 * time.Second):
 			LogInfo("function=Service::rolling, message=Service decision tree rolling...")

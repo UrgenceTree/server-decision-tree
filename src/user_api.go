@@ -41,7 +41,7 @@ func (api *UserAPI) LoadTree(treeConfFilepath string) error {
 
 func (api *UserAPI) HandleUser(userMsg *UserMessage) error {
 
-	// do tree
+	LogInfo("function=UserAPI::HandleUser, message=Handling user: %s", userMsg)
 
 	return nil
 }

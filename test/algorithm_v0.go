@@ -65,6 +65,7 @@ func fill_links(questions []interface{}, elem *json_content) {
 //}
 
 func main() {
+
 	jsonFile, err := os.Open("adc.json")
 	if err != nil {
 		fmt.Println(err)
