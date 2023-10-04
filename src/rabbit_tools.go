@@ -1,4 +1,4 @@
-package rb
+package main
 
 import (
 	amqp "github.com/streadway/amqp"

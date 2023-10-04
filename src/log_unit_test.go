@@ -32,8 +32,21 @@ func TestSetLogLevelString(t *testing.T) {
 	if gLogLevel != LogSeverityDebug {
 		t.Errorf("Expected LogSeverityDebug, got %d", gLogLevel)
 	}
-	// Repeat for all valid log levels.
-	// Add a test case for invalid log level, which should default to DEBUG.
+
+	SetLogLevelString("STATS")
+	if gLogLevel != LogSeverityStats {
+		t.Errorf("Expected LogSeverityStats, got %d", gLogLevel)
+	}
+
+	SetLogLevelString("INFO")
+	if gLogLevel != LogSeverityInfo {
+		t.Errorf("Expected LogSeverityInfo, got %d", gLogLevel)
+	}
+
+	SetLogLevelString("SUCCESS")
+	if gLogLevel != LogSeveritySuccess {
+		t.Errorf("Expected LogSeveritySuccess, got %d", gLogLevel)
+	}
 }
 
 func TestLog(t *testing.T) {
