@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - USDT-34-Github-action-dockerfile
+      - USDT-16-Test-unitaire-Algorithme
       - dev
+      - main
 
 jobs:
   build-img:
