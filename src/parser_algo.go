@@ -6,9 +6,6 @@ import (
 	"io/ioutil"
 	"os"
 	"log"
-	//"strconv"
-	//"flag"
-
 
 	"github.com/streadway/amqp"
 )
@@ -178,7 +175,7 @@ func main() {
 			elem.Score = elem.Score + elem.NoScore[i]
 		}
 		
-		sendToRabbitMQ(&mq, response)
+		sendToRabbitMQ(&mq, response + ", " +  fmt.Sprintf("Score: %.0f", elem.Score))
 		responses = append(responses, response)
 
 		if elem.Link[i] == "null" {
@@ -193,4 +190,6 @@ func main() {
 	}
 
 	fmt.Printf("Score: %.0f\n", elem.Score)
+
+	sendToRabbitMQ(&mq, fmt.Sprintf("Final Score: %.0f", elem.Score))
 }
