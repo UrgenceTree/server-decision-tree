@@ -1,29 +1,61 @@
 {
-  "starting_question": "What is your name?",
+  "starting_question": "Is the victim conscious?",
   "questions": [
     {
-      "question": "What_is_your_age?",
-      "yes_score": 100,
-      "no_score": 200,
-      "link": "What is your favorite color?"
+      "question":   "Is the victim conscious?",
+      "yes_score":  10,
+      "no_score":   20,
+      "yes_link":   "Is the victim breathing normally?",
+      "no_link":    "Does the victim have a pulse?"
     },
     {
-      "question": "What is your name?",
-      "yes_score": 300,
-      "no_score": 400,
-      "link": "What is your age?"
+      "question":   "Is the victim breathing normally?",
+      "yes_score":  5,
+      "no_score":   15,
+      "yes_link":   "Does the victim have any visible injuries?",
+      "no_link":    "Is the victim choking?"
     },
     {
-      "question": "What is your favorite color?",
-      "yes_score": 500,
-      "no_score": 600,
-      "link": "What is your favorite car?"
+      "question":   "Does the victim have any visible injuries?",
+      "yes_score":  10,
+      "no_score":   5,
+      "yes_link":   "Is the injury bleeding profusely?",
+      "no_link":    "Is the victim experiencing any pain?"
     },
     {
-      "question": "What is your favorite car?",
-      "yes_score": 700,
-      "no_score": 800,
-      "link": "null"
+      "question":   "Is the injury bleeding profusely?",
+      "yes_score":  20,
+      "no_score":   10,
+      "yes_link":   "Apply pressure to the wound",
+      "no_link":    "Check for signs of shock"
+    },
+    {
+      "question":   "Is the victim in pain?",
+      "yes_score":  15,
+      "no_score":   5,
+      "yes_link":   "Is the pain chest-related?",
+      "no_link":    "Monitor and comfort the victim"
+    },
+    {
+      "question":   "Is the pain chest-related?",
+      "yes_score":  20,
+      "no_score":   10,
+      "yes_link":   "Call for immediate medical assistance",
+      "no_link":    "Ask about pain location and intensity"
+    },
+    {
+      "question":   "Does the victim have a pulse?",
+      "yes_score":  15,
+      "no_score":   30,
+      "yes_link":   "Is the victim responsive to verbal stimuli?",
+      "no_link":    "Begin CPR immediately"
+    },
+    {
+      "question":   "Is the victim choking?",
+      "yes_score":  30,
+      "no_score":   10,
+      "yes_link":   "Perform Heimlich maneuver",
+      "no_link":    "Check for allergic reactions"
     }
   ]
 }
