@@ -80,7 +80,7 @@ func TestService_LoadConfig(t *testing.T) {
 	// ...
 
 	assert.Nil(t, err)
-	assert.Equal(t, s.Config.TreeConfigFile, "tree/tree_conf.json")
+	assert.Equal(t, s.Config.TreeConfigFile, "tree_conf.json")
 	assert.Equal(t, s.Config.RabbitMQ.URI, "amqp://guest:guest@localhost:5672/")
 	assert.Equal(t, s.Config.RabbitMQ.QueueName, "user_queue")
 	assert.Equal(t, s.Config.RabbitMQ.Port, "5672")

@@ -76,12 +76,15 @@ func (s *Service) Start() {
 		LogFatal("function=Service::Start, error=%v", err.Error())
 		return
 	}
+	if err := s.uAPI.rabbitMQInit(); err != nil {
+		LogFatal("function=Service::Start, error=%v", err.Error())
+		return
+	}
 
 	s.wg.Add(1)
 	go s.rolling()
 
 	LogSuccess("function=Service::Start, message=Service started")
-
 }
 
 func (s *Service) Stop() {
@@ -173,6 +176,7 @@ func (s *Service) rolling() error {
 
 	var err error
 
+	// LogInfo, LogError et LogSuccess sont des fonctions supposées pour le logging
 	LogInfo("function=Service::rabbitMQInit, message=Binding queue...")
 	s.msgs, err = s.ch.Consume(
 		s.q.Name,
@@ -192,21 +196,22 @@ func (s *Service) rolling() error {
 
 	for {
 		select {
-
 		case <-s.done:
 			LogInfo("function=Service::rolling, message=Shutting down...")
 			return nil
 
 		case msg := <-s.msgs:
 			LogInfo("function=Service::rolling, message=Received message: %s", msg.Body)
-			userMessage := &UserMessage{
-				Text: string(msg.Body),
+			var userMessage UserMessage
+			err := json.Unmarshal(msg.Body, &userMessage)
+			if err != nil {
+				LogError("function=Service::rolling, error=Failed to unmarshal message: %v", err)
+				continue
 			}
-			s.uAPI.HandleUser(userMessage)
+			s.uAPI.HandleUser(&userMessage)
 
 		case <-time.After(5 * time.Second):
 			LogInfo("function=Service::rolling, message=Service decision tree rolling...")
-
 		}
 	}
 }

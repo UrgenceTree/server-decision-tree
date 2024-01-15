@@ -2,7 +2,7 @@ package main
 
 func init() {
 
-	//InitLogger()
+	InitLogger()
 }
 
 func main() {
