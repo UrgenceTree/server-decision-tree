@@ -51,7 +51,7 @@ func fill_links(questions []interface{}, elem *json_content) {
 
 	for i := 0; i < len(questions); i++ {
 		curr_link := questions[i].(map[string]interface{})
-		tmp := curr_link["link"].(string)
+		tmp := curr_link["yes_link"].(string)
 		tmp_links = append(tmp_links, tmp)
 	}
 
