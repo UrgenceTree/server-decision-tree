@@ -6,6 +6,10 @@ coverage
 
 # production
 build
+service
+
+# log
+*.log*
 
 # misc
 .DS_Store
@@ -42,3 +46,6 @@ attr.txt
 
 # src
 __pycache__
+
+# SonarQube cache files
+.scannerwork

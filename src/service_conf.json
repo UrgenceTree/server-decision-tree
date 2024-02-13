@@ -1,0 +1,17 @@
+{
+  "tree_config_file": "tree_conf.json",
+  "rabbitmq": {
+    "uri": "amqp://guest:guest@localhost:5672/",
+    "queueName": "user_queue",
+    "port": "5672"
+  },
+  "userAPI": {
+    "baseUrl": "http://localhost:8080/api",
+    "endpoints": {
+      "getUser": "/users/{id}",
+      "createUser": "/users",
+      "updateUser": "/users/{id}",
+      "deleteUser": "/users/{id}"
+    }
+  }
+}
