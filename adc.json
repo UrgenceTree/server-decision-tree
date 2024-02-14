@@ -1,29 +1,23 @@
 {
-    "starting_question": "What is your name?",
+    "starting_question": "Est-ce que la victime est évanouie?",
     "questions": [
         {
-            "question" : "What is your favorite color?",
+            "question" : "Est-ce que la victime est évanouie?",
+            "yes_score": 50,
+            "no_score": 0,
+            "link": "Est-ce que la victime a fait un arrêt cardiaque?"
+        },
+        {
+            "question" : "Est-ce que la victime a fait un arrêt cardiaque?",
             "yes_score": 500,
-            "no_score": 600,
-            "link": "What is your favorite car?"
+            "no_score": 0,
+            "link": "La victime présente-t-elle l'un des symptômes suivants ?\n\t- Inconscient, ne parle plus, n'ouvre pas ses yeux, ne regarde pas, ne réponds pas quand on lui parle, ne réagit pas\n\t- Difficulté pour respirer ou d'autres tensions liées à la respiration\n\t- Signes de choc, pâleur, transpiration"
         },
         {
-            "question" : "What is your favorite car?",
-            "yes_score": 700,
-            "no_score": 800,
+            "question" : "La victime présente-t-elle l'un des symptômes suivants ?\n\t- Inconscient, ne parle plus, n'ouvre pas ses yeux, ne regarde pas, ne réponds pas quand on lui parle, ne réagit pas\n\t- Difficulté pour respirer ou d'autres tensions liées à la respiration\n\t- Signes de choc, pâleur, transpiration",
+            "yes_score": 600,
+            "no_score": 0,
             "link": "null"
-        },
-        {
-            "question" : "What is your age?",
-            "yes_score": 100,
-            "no_score": 200,
-            "link": "What is your favorite color?"
-        },
-        {
-            "question" : "What is your name?",
-            "yes_score": 300,
-            "no_score": 400,
-            "link": "What is your age?"
         }
     ]
 }

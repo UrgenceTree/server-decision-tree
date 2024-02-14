@@ -92,7 +92,7 @@ func orderLists(firstQuestion string, elem *jsonContent) {
 	elem.Questions = newQuestions
 	elem.YesScore = newyesScore
 	elem.NoScore = newnoScore
-	elem.Link = newLink	
+	elem.Link = newLink
 }
 
 
@@ -114,7 +114,7 @@ func main() {
 	fillScore(questions, &elem)
 	fillQuestions(questions, &elem)
 	fillLinks(questions, &elem)
-	
+
 	orderLists(elem.FirstQuestion, &elem)
 
 	var responses []string
@@ -125,12 +125,12 @@ func main() {
 		var response string
 		fmt.Scanln(&response)
 
-		if response == "yes" {
+		if response == "oui" || response == "ouais" {
 			elem.Score = elem.Score + elem.YesScore[i]
-		} else if response == "no" {
+		} else if response == "non" {
 			elem.Score = elem.Score + elem.NoScore[i]
 		}
-		
+
 		responses = append(responses, response)
 
 		if elem.Link[i] == "null" {
